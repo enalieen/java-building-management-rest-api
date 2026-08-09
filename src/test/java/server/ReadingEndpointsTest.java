@@ -39,13 +39,13 @@ class ReadingEndpointsTest {
 	@AfterEach
 	void stopServer() throws Exception {
 		if (app != null) app.stop();
-		if (conn != null && !conn.isClosed()) conn.close();
-		//clear the db from test data:
-		Assertions.assertNotNull(conn);
-		conn.rollback();
-		conn.setAutoCommit(true);
-
+		if (conn != null && !conn.isClosed()) {
+			conn.rollback();
+			conn.setAutoCommit(true);
+			conn.close();
+		}
 	}
+
 //helper functions
 	private Customer testCustomer() { return new Customer( UUID.randomUUID(), "FirstName", "LastName", ICustomer.Gender.M, LocalDate.of(1990, 1, 1) ); }
 	private Reading testReading(Customer customer) {

@@ -68,7 +68,7 @@
 		// forEach = loop through array
         // template string `...` allows embedding variables ${}
         // builds HTML dynamically
-        data);
+
         // Sends data to chart function for visualization
         // ensures graph updates when data changes
 	}
