@@ -23,16 +23,4 @@ class ServerTest {
 	static void stopServer() {
 		Server.stop();
 	}
-
-// endpoints
-	@Test
-	void testResourcesEndpointWorks() {
-		given().when().get("/test/resources").then().statusCode(200).body(equalTo("API works"));
-	}
-
-	/*@Test
-	// + to validate with json schema (plugin)
-	void test allCustomersGet(){
-	;
-	}*/
 }

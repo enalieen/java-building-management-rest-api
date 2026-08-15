@@ -3,36 +3,36 @@ package vorlage.databaseConnection;
 import java.sql.Connection;
 
 public interface IDatabaseConnection {
-	
 	/**
-	 * Stellt eine Datenbankverbindung mit den hinterlegten Eintragungen in der Properties-Datei her
+	 * Establishes a database connection using the settings
+	 * specified in the properties file.
 	 */
 	Connection openConnection(String filename);
-	
+
 	/**
-	 * Erstellt alle notwendigen Tabellen in der Datenbank
+	 * Creates all necessary tables in the database.
 	 */
 	void createAllTables();
-	
+
 	/**
-	 * Loescht alle Tabellen in der Datenbank
+	 * Deletes all tables from the database.
 	 */
 	void removeAllTables();
-	
+
 	/**
-	 * Fuehrt ein truncate bei allen Tabellen in der Datenbank durch
+	 * Truncates all tables in the database.
 	 */
 	void truncateAllTables();
-	
+
 	/**
-	 * Schliesst die Verbindung zu Datenbank
+	 * Closes the database connection.
 	 */
 	void closeConnection();
-	
+
 	/**
-	 * Gibt das SQL-Connection Objekt der Datenbankverbindung zurueck
-	 * @return
+	 * Returns the SQL Connection object of the database connection.
+	 *
+	 * @return the database connection
 	 */
 	Connection getConnection();
-
 }

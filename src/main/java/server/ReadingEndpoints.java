@@ -40,6 +40,9 @@ public class ReadingEndpoints {
 			try {
 				Reading reading = ctx.bodyAsClass(Reading.class);
 
+				System.out.println("Reading received: " + reading);
+				System.out.println("Customer: " + reading.getCustomer());
+
 				boolean created = readingDao.create(reading);
 
 				if (created) {
@@ -49,7 +52,8 @@ public class ReadingEndpoints {
 				}
 
 			} catch (Exception e) {
-				ctx.status(400).result("Invalid request body");
+				e.printStackTrace(); // ВАЖНО
+				ctx.status(400).result("ERROR: " + e.getClass().getName() + " - " + e.getMessage());
 			}
 		});
 

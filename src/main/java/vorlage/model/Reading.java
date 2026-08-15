@@ -2,6 +2,8 @@ package vorlage.model;
 
 import java.time.LocalDate;
 import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.hv.model.IReading;
 import dev.hv.model.ICustomer;
 
@@ -25,12 +27,14 @@ public class Reading implements IReading {
 		this.dateOfReading = dateOfReading;
 		this.kindOfMeter = kindOfMeter;
 		this.meterCount = meterCount;
+		this.kindOfMeter = kindOfMeter;
+		this.meterCount = meterCount;
 		this.meterId = meterId;
 		this.comment = comment;
 		this.substitute = substitute;
 	}
 
-	// Default constructor
+	// Default constructor required by Jackson for JSON deserialization
 	public Reading() {}
 
 	// Getters
@@ -80,6 +84,12 @@ public class Reading implements IReading {
 		this.customer = (Customer) customer;
 	}
 
+	// Jackson uses this method to deserialize the concrete Customer type from JSON
+	@JsonProperty("customer")
+	public void setCustomerFromJson(Customer customer) {
+		this.customer = customer;
+	}
+
 	public void setDateOfReading(LocalDate dateOfReading) {
 		this.dateOfReading = dateOfReading;
 	}
@@ -104,7 +114,6 @@ public class Reading implements IReading {
 		this.substitute = substitute;
 	}
 
-	// Implement the abstract method from IReading
 	@Override
 	public String printDateOfReading() {
 		return dateOfReading != null ? dateOfReading.toString() : null;

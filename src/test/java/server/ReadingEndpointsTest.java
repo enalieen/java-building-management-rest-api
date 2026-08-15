@@ -24,17 +24,21 @@ class ReadingEndpointsTest {
 	@BeforeEach
 	void setup() throws Exception {
 		JDBCDBConn db = new JDBCDBConn();
-		db.openConnection("db.properties"); // open real or test database connection
+		conn = db.openConnection("db.properties"); // open real or test database connection
 		db.removeAllTables();               // drop all existing tables
 		db.createAllTables();               // recreate customer and reading tables
 
-		app = Javalin.create();
-		new ReadingEndpoints(readingDAO).register(app);
-		app.start(0); // random free port
-		conn = db.getConnection();
+		// Create DAO with the actual database connection
 		readingDAO = new ReadingDAO(conn);
-		conn.setAutoCommit(false);
 
+		// Create and start test server
+		app = Javalin.create();
+
+		new ReadingEndpoints(readingDAO).register(app);
+		app.start(0);
+
+		// Use transactions for test cleanup
+		conn.setAutoCommit(false);
 	}
 	@AfterEach
 	void stopServer() throws Exception {
@@ -97,7 +101,6 @@ class ReadingEndpointsTest {
 		Customer testCustomer = testCustomer();
 		Reading testReading = testReading(testCustomer);
 
-		readingDAO.create(testReading); // creating with DAO
 		given()
 			.port(app.port())
 			.contentType("application/json")
