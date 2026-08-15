@@ -2,7 +2,6 @@ package vorlage.databaseConnection;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import vorlage.databaseConnection.*;
 import java.sql.Connection;
 import java.sql.Statement;
 
@@ -43,7 +42,7 @@ class JDBCDBConnTest {
 		}
 
 		// Truncate should clear all data
-		assertDoesNotThrow(() -> db.truncateAllTables());
+		assertDoesNotThrow(db::truncateAllTables);
 
 		// Verify tables are empty
 		try (Statement st = conn.createStatement()) {
@@ -121,7 +120,7 @@ class JDBCDBConnTest {
 
 		// Should successfully connect without placeholder replacement
 		assertDoesNotThrow(() -> {
-			Connection conn = db.openConnection("test-no-placeholder.properties");
+			Connection conn = db.openConnection("db.properties");
 			assertNotNull(conn);
 			assertFalse(conn.isClosed());
 		});
@@ -134,10 +133,10 @@ class JDBCDBConnTest {
 		db.openConnection("test.properties");
 
 		// First call
-		assertDoesNotThrow(() -> db.removeAllTables());
+		assertDoesNotThrow(db::removeAllTables);
 
 		// Second call - tables don't exist anymore, but DROP IF EXISTS should handle it
-		assertDoesNotThrow(() -> db.removeAllTables());
+		assertDoesNotThrow(db::removeAllTables);
 	}
 
 	@Test
@@ -150,7 +149,7 @@ class JDBCDBConnTest {
 		conn.close();
 
 		// Should throw RuntimeException wrapping SQLException
-		assertThrows(RuntimeException.class, () -> db.createAllTables());
+		assertThrows(RuntimeException.class, db::createAllTables);
 	}
 
 	@Test
@@ -163,7 +162,7 @@ class JDBCDBConnTest {
 		conn.close();
 
 		// Should throw RuntimeException wrapping SQLException
-		assertThrows(RuntimeException.class, () -> db.removeAllTables());
+		assertThrows(RuntimeException.class, db::removeAllTables);
 	}
 
 	@Test
@@ -176,7 +175,7 @@ class JDBCDBConnTest {
 		conn.close();
 
 		// Should throw RuntimeException wrapping SQLException
-		assertThrows(RuntimeException.class, () -> db.truncateAllTables());
+		assertThrows(RuntimeException.class, db::truncateAllTables);
 	}
 
 }

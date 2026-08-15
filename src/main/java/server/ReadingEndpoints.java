@@ -52,7 +52,7 @@ public class ReadingEndpoints {
 				}
 
 			} catch (Exception e) {
-				e.printStackTrace(); // ВАЖНО
+				e.printStackTrace();
 				ctx.status(400).result("ERROR: " + e.getClass().getName() + " - " + e.getMessage());
 			}
 		});

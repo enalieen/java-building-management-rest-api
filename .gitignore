@@ -1,13 +1,9 @@
-# ===============================================
-#  Zusammengestellt für Java, Maven & gängige IDEs
-# ===============================================
-
-# 1. Maven-spezifische Dateien und Verzeichnisse
+# 1. Maven-specific files and directories
 # -----------------------------------------------
-# Das 'target'-Verzeichnis enthält alle Build-Artefakte (kompilierte Klassen, Jars, etc.)
+# The 'target' directory contains all build artifacts (compiled classes, JARs, etc.)
 target/
 
-# Log-Dateien von Maven
+# Maven log files
 *.log
 pom.xml.tag
 pom.xml.releaseBackup
@@ -17,14 +13,14 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 
-# Maven-Wrapper-Dateien (wenn man sie nicht für jeden Entwickler erzwingen will)
-# Meistens will man diese aber committen, daher auskommentiert.
+# Maven wrapper files (if you don't want to enforce them for every developer)
+# However, usually you want to commit these, so they are commented out.
 # .mvn/
 # mvnw
 # mvnw.cmd
 
 
-# 2. IDE-spezifische Konfigurationsdateien
+# 2. IDE-specific configuration files
 # ------------------------------------------
 
 # IntelliJ IDEA
@@ -61,7 +57,7 @@ build/
 .vscode/
 
 
-# 3. Betriebssystem-spezifische Dateien
+# 3. Operating system-specific files
 # ---------------------------------------
 # macOS
 .DS_Store
@@ -75,26 +71,25 @@ ehthumbs.db
 # thumbs.db
 
 
-# 4. Allgemeine und Sonstige Dateien
+# 4. General and miscellaneous files
 # ------------------------------------
-# Log-Dateien
+# Log files
 *.log
 logs/
 
-# Lokale Konfigurationsdateien
-# (z.B. wenn man Passwörter lokal speichert, die nicht ins Repo sollen)
+# Local configuration files
+# (e.g., when storing passwords locally that shouldn't be in the repo)
 local.properties
 
-# Komprimierte Dateien, die oft als Backup erstellt werden
+# Compressed files often created as backups
 *.zip
 *.tar
 *.gz
 *.rar
 
-# hs_err_pid* Dateien, die von der JVM bei einem Crash erstellt werden
+# hs_err_pid* files created by the JVM during a crash
 hs_err_pid*.env
 githpwd
 db-data/
-.env
 .env
 compose.yml.backup
