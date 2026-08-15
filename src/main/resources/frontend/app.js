@@ -64,7 +64,10 @@
 					<td>${c.gender}</td>
 				</tr>
 			`;
+
 		});
+		// Update the chart with the current customer data
+         renderGenderChart(data);
 		// forEach = loop through array
         // template string `...` allows embedding variables ${}
         // builds HTML dynamically
