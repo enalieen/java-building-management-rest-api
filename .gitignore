@@ -80,6 +80,7 @@ logs/
 # Local configuration files
 # (e.g., when storing passwords locally that shouldn't be in the repo)
 local.properties
+src/main/resources/db.properties
 
 # Compressed files often created as backups
 *.zip
