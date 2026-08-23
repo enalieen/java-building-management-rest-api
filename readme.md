@@ -1,4 +1,4 @@
-# NothingBurger presents: Digital Building Data Management
+# Digital Building Data Management
 
 ## Project Description
 This project is a digital building management system developed as part of the IT project course.
@@ -43,7 +43,7 @@ src
 │       │   ├── index.html
 │       │   ├── app.js
 │       │   └── style.css
-│       └── db.properties
+│       │   └── db.properties.origin
 ```
 ---
 
@@ -116,10 +116,15 @@ Maven is a build and dependency management tool for Java projects.
 java -version
 javac -version
 ```
-
-
-
 ---
+### Important: Security & Database Configuration
+To keep credentials secure, the production `db.properties` file is excluded from Git tracking (`.gitignore`). Before running the application locally, you **must create this file manually**.
+
+1. Locate the template file `src/main/resources/db.properties.origin`.
+2. Duplicate it and rename the copy to `db.properties` in the same directory.
+3. Fill in your local database credentials (e.g., `db.user=yourUser`, `db.pw=yourPassword`).
+---
+
 ## Setup Database with Docker Compose
 
 1. **Start Database**:
@@ -127,8 +132,8 @@ Run the following command in the project directory:
      ```bash
      docker-compose up -d
      ```
-   * This will start the MariaDB container on port 3306.
-   * Ensure MariaDB is running on the configured port (default: 3306).
+   * This will start the MariaDB container.
+   * Ensure MariaDB is running on the configured port (default mapping: 3307 outside -> 3306 inside).
 
 2. **Check if Database is Running**:
 Run:
@@ -182,6 +187,7 @@ Note: Opening directly by double-click may not render styles correctly in some b
 
 * The CI pipeline runs automatically on every commit to test the code.
 * It sets up the database with Docker, runs the tests, and ensures everything works.
+* **Secrets Management:** Sensitive properties like database credentials are secure and loaded dynamically into the pipeline via **GitHub Secrets** (`DB_USER` and `DB_PASSWORD`), meaning no plain-text passwords ever exist in the workflows repository code.
 
 
 ---

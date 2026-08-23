@@ -27,6 +27,17 @@ jobs:
       - name: Start Docker Compose
         run: docker compose up -d
 
+      - name: Create db.properties file from Secrets
+        env:
+          SECRET_USER: ${{ secrets.DB_USER }}
+          SECRET_PW: ${{ secrets.DB_PASSWORD }}
+        run: |
+          mkdir -p src/main/resources
+          echo "db.url=jdbc:mariadb://127.0.0.1:3307/hausverwaltung?useSSL=false&allowPublicKeyRetrieval=true" > src/main/resources/db.properties
+          echo "db.user=${SECRET_USER}" >> src/main/resources/db.properties
+          echo "db.pw=${SECRET_PW}" >> src/main/resources/db.properties
+
+
       - name: Wait for database to be ready
         run: |
           echo "Waiting for MySQL to be ready..."
